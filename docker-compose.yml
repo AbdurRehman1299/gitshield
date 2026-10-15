@@ -1,0 +1,73 @@
+services:
+  # ---------------------------------------------------------------------------
+  # PostgreSQL database
+  # ---------------------------------------------------------------------------
+  db:
+    image: postgres:16-alpine
+    container_name: gitshield-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: gitshield
+      POSTGRES_PASSWORD: gitshield
+      POSTGRES_DB: gitshield
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U gitshield -d gitshield"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+
+  # ---------------------------------------------------------------------------
+  # One-shot migration runner (reuses the builder stage which has the Prisma CLI)
+  # ---------------------------------------------------------------------------
+  migrate:
+    build:
+      context: .
+      target: builder
+    container_name: gitshield-migrate
+    command: npx prisma migrate deploy
+    environment:
+      DATABASE_URL: postgresql://gitshield:gitshield@db:5432/gitshield?schema=public
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: "no"
+
+  # ---------------------------------------------------------------------------
+  # GitShield Next.js application
+  # ---------------------------------------------------------------------------
+  app:
+    build:
+      context: .
+      target: runner
+    container_name: gitshield-app
+    restart: unless-stopped
+    environment:
+      DATABASE_URL: postgresql://gitshield:gitshield@db:5432/gitshield?schema=public
+      GROQ_API_KEY: ${GROQ_API_KEY:-}
+      GROQ_MODEL: ${GROQ_MODEL:-llama-3.3-70b-versatile}
+      GROQ_FALLBACK_MODEL: ${GROQ_FALLBACK_MODEL:-llama-3.1-8b-instant}
+      GITHUB_TOKEN: ${GITHUB_TOKEN:-}
+      MAX_REPO_FILES: ${MAX_REPO_FILES:-40}
+      MAX_FILE_BYTES: ${MAX_FILE_BYTES:-102400}
+      MAX_TOTAL_BYTES: ${MAX_TOTAL_BYTES:-2097152}
+      MAX_GROQ_CHARS: ${MAX_GROQ_CHARS:-24000}
+    ports:
+      - "3000:3000"
+    depends_on:
+      db:
+        condition: service_healthy
+      migrate:
+        condition: service_completed_successfully
+    healthcheck:
+      test: ["CMD-SHELL", "wget -qO- http://localhost:3000/api/health || exit 1"]
+      interval: 15s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+volumes:
+  pgdata:

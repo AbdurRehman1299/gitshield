@@ -1,0 +1,66 @@
+// GitShield Prisma schema
+// -----------------------------------------------------------------------------
+// Datasource: PostgreSQL. The connection string is injected via DATABASE_URL.
+// -----------------------------------------------------------------------------
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+/// Overall verdict for a scan.
+enum ScanStatus {
+  SAFE
+  VULNERABLE
+}
+
+/// Where the scanned content came from.
+enum SourceType {
+  REPOSITORY
+  PASTE
+}
+
+/// A repository (or a pasted snippet) that GitShield can scan.
+model Repository {
+  id            String       @id @default(cuid())
+  /// Human friendly name, e.g. "owner/repo" or "pasted-snippet.env".
+  name          String
+  /// Unique identifier: the repo URL, or a synthetic "paste://<name>" key.
+  url           String       @unique
+  lastScannedAt DateTime?
+  createdAt     DateTime     @default(now())
+
+  scans ScanResult[]
+
+  @@index([createdAt])
+}
+
+/// The result of a single scan run.
+model ScanResult {
+  id           String     @id @default(cuid())
+  repositoryId String
+  repository   Repository @relation(fields: [repositoryId], references: [id], onDelete: Cascade)
+
+  status     ScanStatus
+  sourceType SourceType @default(REPOSITORY)
+
+  /// Array of SecretIssue objects (see src/types). Stored as jsonb.
+  issuesFound Json @default("[]")
+
+  /// Number of files that were actually inspected.
+  filesScanned Int @default(0)
+  /// Aggregate risk score (0-100), derived from issue severities.
+  riskScore    Int @default(0)
+  /// Short AI generated executive summary (nullable when Groq is disabled).
+  aiSummary    String?
+
+  createdAt DateTime @default(now())
+
+  @@index([repositoryId])
+  @@index([createdAt])
+  @@index([status])
+}
