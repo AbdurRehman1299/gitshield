@@ -33,10 +33,10 @@ export function StatusBadge({ status }: { status: "SAFE" | "VULNERABLE" }) {
         "inline-flex items-center gap-1.5 rounded-full border px-2.5 py-0.5 text-xs font-semibold",
         safe
           ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
-          : "border-red-500/30 bg-red-500/10 text-red-400",
+          : "border-rose-500/30 bg-rose-500/10 text-rose-400",
       )}
     >
-      <span className={cn("h-1.5 w-1.5 rounded-full", safe ? "bg-emerald-400" : "bg-red-400")} />
+      <span className={cn("h-1.5 w-1.5 rounded-full", safe ? "bg-emerald-400" : "bg-rose-400")} />
       {safe ? "SAFE" : "VULNERABLE"}
     </span>
   );

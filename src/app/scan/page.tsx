@@ -29,7 +29,7 @@ export default function ScanPage() {
   return (
     <div className="space-y-8">
       <div>
-        <h1 className="text-2xl font-bold tracking-tight text-slate-50 sm:text-3xl">
+        <h1 className="font-display text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl">
           Run a New Scan
         </h1>
         <p className="mt-1 text-sm text-muted">

@@ -23,7 +23,7 @@ export default async function DashboardPage() {
     <div className="space-y-8">
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
         <div>
-          <h1 className="text-2xl font-bold tracking-tight text-slate-50 sm:text-3xl">
+          <h1 className="font-display text-3xl font-bold tracking-tight text-slate-50 sm:text-4xl">
             Security Dashboard
           </h1>
           <p className="mt-1 text-sm text-muted">
@@ -163,7 +163,7 @@ export default async function DashboardPage() {
                         className={cn(
                           "font-semibold",
                           scan.riskScore >= 60
-                            ? "text-red-400"
+                            ? "text-rose-400"
                             : scan.riskScore >= 30
                               ? "text-amber-400"
                               : "text-emerald-400",

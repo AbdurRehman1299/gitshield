@@ -15,16 +15,16 @@ export function StatCard({
   tone?: "default" | "danger" | "success" | "accent";
 }) {
   const tones = {
-    default: "text-slate-200 bg-surface-2",
-    danger: "text-red-400 bg-red-500/10",
-    success: "text-emerald-400 bg-emerald-500/10",
-    accent: "text-accent bg-accent/10",
+    default: "text-slate-300 bg-surface-2",
+    danger: "text-rose-400 bg-rose-500/10 ring-1 ring-rose-500/20",
+    success: "text-emerald-400 bg-emerald-500/10 ring-1 ring-emerald-500/20",
+    accent: "text-cyan-300 bg-accent/10 ring-1 ring-accent/20",
   } as const;
 
   return (
-    <Card className="animate-fade-up">
+    <Card>
       <div className="flex items-center justify-between">
-        <span className="text-sm font-medium text-muted">{label}</span>
+        <span className="text-xs font-semibold uppercase tracking-wider text-muted">{label}</span>
         <span className={cn("flex h-9 w-9 items-center justify-center rounded-lg", tones[tone])}>
           {icon}
         </span>

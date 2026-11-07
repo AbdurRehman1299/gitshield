@@ -26,7 +26,7 @@ const STEPS = [
 
 export function RemediationPanel({ aiSummary }: { aiSummary?: string | null }) {
   return (
-    <Card className="animate-fade-up">
+    <Card>
       <h2 className="text-lg font-semibold text-slate-100">Remediation playbook</h2>
       {aiSummary ? (
         <p className="mt-2 rounded-xl border border-accent/20 bg-accent/5 px-3 py-2.5 text-sm leading-relaxed text-cyan-100/90">

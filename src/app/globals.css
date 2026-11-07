@@ -2,17 +2,18 @@
 
 /* ---------------------------------------------------------------------------
    GitShield design tokens (dark-first security console palette)
-   Defining these under @theme exposes utilities such as `bg-surface`,
-   `border-border`, `text-accent`, etc.
+   Refined for exceptional contrast, hierarchy, and tactile depth.
 --------------------------------------------------------------------------- */
 @theme {
-  --color-background: #05080f;
-  --color-surface: #0b1220;
-  --color-surface-2: #111a2e;
-  --color-border: #1c2740;
-  --color-muted: #7b8aa8;
+  --color-background: #070b14;
+  --color-surface: #0d1526;
+  --color-surface-2: #131d33;
+  --color-border: #1e293b;
+  --color-muted: #8a99b3;
+  --color-placeholder: #7a89a3;
   --color-accent: #22d3ee;
   --color-accent-soft: #0e7490;
+  --font-display: var(--font-display);
 }
 
 :root {
@@ -22,7 +23,7 @@
 html,
 body {
   background-color: var(--color-background);
-  color: #e5eaf3;
+  color: #e8edf5;
 }
 
 body {
@@ -30,30 +31,48 @@ body {
     ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue",
     Arial, "Noto Sans", sans-serif;
   -webkit-font-smoothing: antialiased;
+  background-color: var(--color-background);
   background-image:
-    radial-gradient(60rem 40rem at 100% -10%, rgba(34, 211, 238, 0.08), transparent),
-    radial-gradient(50rem 30rem at -10% 10%, rgba(99, 102, 241, 0.08), transparent);
+    linear-gradient(rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(148, 163, 184, 0.045) 1px, transparent 1px),
+    radial-gradient(70rem 50rem at 100% -10%, rgba(34, 211, 238, 0.05), transparent),
+    radial-gradient(60rem 40rem at -10% 10%, rgba(99, 102, 241, 0.05), transparent);
+  background-size:
+    44px 44px,
+    44px 44px,
+    100% 100%,
+    100% 100%;
   background-attachment: fixed;
+  background-position: 0 0, 0 0, 0 0, 0 0;
 }
 
-/* Thin, dark scrollbars to match the console aesthetic. */
+/* Headings and brand marks use the display face. */
+h1, h2, h3, h4, .font-display {
+  font-family: var(--font-display);
+  letter-spacing: -0.02em;
+}
+
+/* Thin, tactile scrollbars to match the console aesthetic. */
 * {
   scrollbar-width: thin;
   scrollbar-color: var(--color-border) transparent;
 }
 *::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 8px;
+  height: 8px;
 }
 *::-webkit-scrollbar-thumb {
   background-color: var(--color-border);
   border-radius: 9999px;
 }
+*::-webkit-scrollbar-thumb:hover {
+  background-color: #334155;
+}
 
 @keyframes gitshield-fade-up {
   from {
     opacity: 0;
-    transform: translateY(6px);
+    transform: translateY(8px);
   }
   to {
     opacity: 1;
@@ -62,5 +81,5 @@ body {
 }
 
 .animate-fade-up {
-  animation: gitshield-fade-up 0.35s ease-out both;
+  animation: gitshield-fade-up 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
 }

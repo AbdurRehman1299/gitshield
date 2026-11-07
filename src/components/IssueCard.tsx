@@ -5,7 +5,7 @@ import { SeverityBadge } from "./SeverityBadge";
 
 export function IssueCard({ issue }: { issue: SecretIssue }) {
   return (
-    <div className="animate-fade-up rounded-2xl border border-border bg-surface/70 p-5">
+    <div className="rounded-2xl border border-border bg-surface/50 p-6 transition-all hover:bg-surface/60">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="flex items-start gap-3">
           <span className="mt-0.5 flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-surface-2 text-muted">

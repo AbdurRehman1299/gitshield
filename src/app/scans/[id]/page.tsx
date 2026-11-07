@@ -41,7 +41,7 @@ export default async function ScanResultPage({
       <div className="flex flex-col justify-between gap-4 sm:flex-row sm:items-start">
         <div>
           <div className="flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-bold tracking-tight text-slate-50">
+            <h1 className="font-display text-3xl font-bold tracking-tight text-slate-50">
               {scan.repository.name}
             </h1>
             <StatusBadge status={scan.status} />
@@ -148,7 +148,7 @@ function SummaryTile({
 }) {
   const tones = {
     default: "bg-surface-2 text-slate-300",
-    danger: "bg-red-500/10 text-red-400",
+    danger: "bg-rose-500/10 text-rose-400",
     warning: "bg-amber-500/10 text-amber-400",
     success: "bg-emerald-500/10 text-emerald-400",
     accent: "bg-accent/10 text-accent",

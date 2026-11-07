@@ -86,7 +86,7 @@ export function ScanForm() {
                 value={repoUrl}
                 onChange={(e) => setRepoUrl(e.target.value)}
                 placeholder="https://github.com/owner/repo"
-                className="w-full rounded-xl border border-border bg-background/60 py-2.5 pl-10 pr-3 text-sm text-slate-100 placeholder:text-muted/70 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
+                className="w-full rounded-xl border border-border bg-background/60 py-2.5 pl-10 pr-3 text-sm text-slate-100 placeholder:text-placeholder focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
               />
             </div>
             <p className="mt-1.5 text-xs text-muted">
@@ -108,7 +108,7 @@ export function ScanForm() {
                     value={filename}
                     onChange={(e) => setFilename(e.target.value)}
                     placeholder=".env"
-                    className="w-full rounded-xl border border-border bg-background/60 py-2.5 pl-10 pr-3 text-sm text-slate-100 placeholder:text-muted/70 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
+                    className="w-full rounded-xl border border-border bg-background/60 py-2.5 pl-10 pr-3 text-sm text-slate-100 placeholder:text-placeholder focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
                   />
                 </div>
               </div>
@@ -121,7 +121,7 @@ export function ScanForm() {
                   value={label}
                   onChange={(e) => setLabel(e.target.value)}
                   placeholder="my-service config"
-                  className="w-full rounded-xl border border-border bg-background/60 px-3 py-2.5 text-sm text-slate-100 placeholder:text-muted/70 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
+                  className="w-full rounded-xl border border-border bg-background/60 px-3 py-2.5 text-sm text-slate-100 placeholder:text-placeholder focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
                 />
               </div>
             </div>
@@ -147,14 +147,14 @@ export function ScanForm() {
                 rows={12}
                 spellCheck={false}
                 placeholder="DATABASE_URL=postgres://user:password@host:5432/db&#10;API_KEY=your_api_key_here"
-                className="w-full rounded-xl border border-border bg-background/60 p-3 font-mono text-xs leading-relaxed text-slate-100 placeholder:text-muted/70 focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
+                className="w-full rounded-xl border border-border bg-background/60 p-3 font-mono text-xs leading-relaxed text-slate-100 placeholder:text-placeholder focus:border-accent/60 focus:outline-none focus:ring-2 focus:ring-accent/30"
               />
             </div>
           </>
         )}
 
         {error ? (
-          <div className="rounded-xl border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-300">
+          <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 px-4 py-3 text-sm text-rose-300">
             {error}
           </div>
         ) : null}

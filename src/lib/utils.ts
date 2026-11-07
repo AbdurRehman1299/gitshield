@@ -49,10 +49,10 @@ export function severityColor(severity: Severity): {
   switch (severity) {
     case "CRITICAL":
       return {
-        text: "text-red-400",
-        bg: "bg-red-500/10",
-        border: "border-red-500/30",
-        dot: "bg-red-500",
+        text: "text-rose-400",
+        bg: "bg-rose-500/10",
+        border: "border-rose-500/30",
+        dot: "bg-rose-500",
       };
     case "HIGH":
       return {
